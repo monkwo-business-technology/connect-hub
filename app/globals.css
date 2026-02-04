@@ -1,0 +1,404 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* M3 Color System */
+    --primary: #1a73e8;
+    --primary-container: #d3e3fd;
+    --on-primary: #ffffff;
+    --on-primary-container: #041e49;
+
+    --secondary: #5f6368;
+    --secondary-container: #e8eaed;
+
+    --surface: #ffffff;
+    --surface-container: #f0f4f8;
+    --surface-container-high: #e8eaed;
+    --surface-variant: #e7e0ec;
+
+    --on-surface: #1f1f1f;
+    --on-surface-variant: #5f6368;
+
+    --outline: #dadce0;
+    --outline-variant: #c4c7c5;
+
+    --error: #d93025;
+    --error-container: #f9dedc;
+
+    --success: #1e8e3e;
+    --success-container: #ceead6;
+
+    --warning: #f9ab00;
+    --warning-container: #fef7e0;
+
+    /* Device Frame */
+    --device-frame-color: #1a1a1a;
+    --device-bezel-color: #0d0d0d;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Roboto', system-ui, sans-serif;
+    background-color: var(--surface-container);
+    color: var(--on-surface);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Google Sans', system-ui, sans-serif;
+  }
+
+  /* Device Frame Wrapper - Centers the phone on desktop */
+  .device-frame-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  /* iPhone 15 Pro Max Style Device Frame - Large Display */
+  .device-frame {
+    position: relative;
+    width: 430px;
+    height: 932px;
+    background: var(--device-frame-color);
+    border-radius: 60px;
+    padding: 14px;
+    box-shadow:
+      0 0 0 2px var(--device-bezel-color),
+      0 0 0 4px #2a2a2a,
+      0 25px 50px -12px rgba(0, 0, 0, 0.5),
+      0 0 100px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Side buttons */
+  .device-frame::before {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: 180px;
+    width: 4px;
+    height: 80px;
+    background: #2a2a2a;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .device-frame::after {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 150px;
+    width: 4px;
+    height: 35px;
+    background: #2a2a2a;
+    border-radius: 2px 0 0 2px;
+    box-shadow: 0 55px 0 #2a2a2a, 0 95px 0 #2a2a2a;
+  }
+
+  /* Dynamic Island / Notch */
+  .device-notch {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 162px;
+    height: 42px;
+    background: #000;
+    border-radius: 24px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .device-speaker {
+    width: 6px;
+    height: 6px;
+    background: #1a1a1a;
+    border-radius: 50%;
+  }
+
+  .device-camera {
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #1565c0 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 3px rgba(255,255,255,0.3);
+  }
+
+  /* Device Screen */
+  .device-screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--surface-container);
+    border-radius: 48px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Content area with proper padding for header/nav */
+  .device-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 100px;
+    padding-bottom: 90px;
+  }
+
+  /* Home Indicator */
+  .device-home-indicator {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 148px;
+    height: 5px;
+    background: #fff;
+    border-radius: 3px;
+    opacity: 0.3;
+    z-index: 100;
+  }
+
+  /* Device Header - account for notch */
+  .device-header {
+    padding-top: 44px;
+  }
+
+  /* Device Nav - account for home indicator */
+  .device-nav {
+    padding-bottom: 20px;
+  }
+
+  /* Responsive: On mobile screens, remove the device frame */
+  @media (max-width: 430px) {
+    .device-frame-wrapper {
+      background: var(--surface-container);
+      padding: 0;
+    }
+
+    .device-frame {
+      width: 100%;
+      height: 100vh;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    .device-frame::before,
+    .device-frame::after {
+      display: none;
+    }
+
+    .device-notch {
+      display: none;
+    }
+
+    .device-screen {
+      border-radius: 0;
+    }
+
+    .device-home-indicator {
+      display: none;
+    }
+
+    .device-content {
+      padding-top: 56px;
+      padding-bottom: 64px;
+    }
+
+    .device-header {
+      padding-top: 0;
+      position: fixed;
+    }
+
+    .device-nav {
+      padding-bottom: 0;
+      position: fixed;
+    }
+  }
+}
+
+@layer components {
+  /* M3 Component Styles */
+  .m3-card {
+    @apply bg-white rounded-2xl border border-gray-200 p-4;
+    border-color: var(--outline);
+  }
+
+  .m3-card-elevated {
+    @apply bg-white rounded-2xl p-4 shadow-sm;
+  }
+
+  .m3-filled-button {
+    @apply px-6 py-3 rounded-full font-medium transition-all;
+    font-family: 'Google Sans', sans-serif;
+    background-color: var(--primary);
+    color: var(--on-primary);
+  }
+
+  .m3-filled-button:hover {
+    filter: brightness(0.95);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  .m3-outlined-button {
+    @apply px-6 py-3 rounded-full font-medium transition-all border;
+    font-family: 'Google Sans', sans-serif;
+    border-color: var(--outline);
+    color: var(--primary);
+  }
+
+  .m3-outlined-button:hover {
+    background-color: rgba(26, 115, 232, 0.08);
+  }
+
+  .m3-text-button {
+    @apply px-4 py-2 rounded-full font-medium transition-all;
+    font-family: 'Google Sans', sans-serif;
+    color: var(--primary);
+  }
+
+  .m3-text-button:hover {
+    background-color: rgba(26, 115, 232, 0.08);
+  }
+
+  .m3-chip {
+    @apply px-4 py-2 rounded-full text-sm font-medium transition-all;
+    background-color: var(--surface-container-high);
+    color: var(--on-surface);
+  }
+
+  .m3-chip-selected {
+    background-color: var(--secondary-container);
+    color: var(--on-surface);
+  }
+
+  .m3-chip:hover {
+    filter: brightness(0.97);
+  }
+
+  .m3-search-bar {
+    @apply rounded-full px-4 py-3 w-full;
+    background-color: var(--surface-container-high);
+    border: none;
+    outline: none;
+  }
+
+  .m3-search-bar:focus {
+    background-color: var(--surface);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+
+  .m3-tab {
+    @apply px-4 py-3 font-medium text-sm transition-all relative;
+    font-family: 'Google Sans', sans-serif;
+    color: var(--on-surface-variant);
+  }
+
+  .m3-tab-active {
+    color: var(--primary);
+  }
+
+  .m3-tab-active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 3px;
+    background-color: var(--primary);
+    border-radius: 3px 3px 0 0;
+  }
+
+  .m3-fab {
+    @apply fixed bottom-24 right-4 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg;
+    background-color: var(--primary-container);
+    color: var(--on-primary-container);
+  }
+
+  .m3-avatar {
+    @apply rounded-full flex items-center justify-center font-medium;
+    font-family: 'Google Sans', sans-serif;
+  }
+
+  .m3-badge {
+    @apply px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .m3-list-item {
+    @apply flex items-center gap-4 p-4 transition-all cursor-pointer;
+  }
+
+  .m3-list-item:hover {
+    background-color: rgba(0,0,0,0.04);
+  }
+}
+
+@layer utilities {
+  /* Icon styles for Material Symbols */
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+  }
+
+  /* Live indicator animation */
+  @keyframes pulse-live {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .live-indicator {
+    animation: pulse-live 2s ease-in-out infinite;
+  }
+
+  /* Spin animation for loading */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--outline);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--on-surface-variant);
+}
